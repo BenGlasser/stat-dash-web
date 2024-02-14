@@ -49,7 +49,6 @@ const styles = {
         color: 'var(--rs-primary-50)',
         justifyContent: 'center',
         alignItems: 'center',
-        fontSize: '10px',
     },
     img: {
         height: '100px',
