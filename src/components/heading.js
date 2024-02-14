@@ -1,13 +1,11 @@
 import React, { useState, useRef } from 'react'
-import Summoner from '../components/summoner'
-import { Form, FlexboxGrid, Input, InputGroup, Row } from 'rsuite'
+import { Form, FlexboxGrid, InputGroup} from 'rsuite'
 import SearchIcon from '@rsuite/icons/Search'
-import { motion } from 'framer-motion'
 
 const styles = {
   header: {
     width: '100%',
-    padding: '20px'
+    padding: 20,
   },
   input: {
     margin: 'auto'
@@ -34,7 +32,6 @@ const Home = ({ ...props }) => {
   }
 
   return (
-    <div style={styles.page}>
       <FlexboxGrid justify="start" style={styles.header}>
         <FlexboxGrid.Item colspan={12}>
           <h1>Stat Dash</h1>
@@ -58,11 +55,6 @@ const Home = ({ ...props }) => {
           </Form>
         </FlexboxGrid.Item>
       </FlexboxGrid>
-      <motion.div animate={{ x: 100 }}>
-        <Summoner summonerName={summonerName} />
-      </motion.div>
-    </div>
-
   )
 }
 
