@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from "@apollo/client";
 import { GET_SUMMONER } from '../gql/queries/summoner';
-import { Row, Col, Placeholder, Avatar, Panel, FlexboxGrid } from 'rsuite';
+import { Col, Placeholder, Avatar, Panel, FlexboxGrid } from 'rsuite';
 
 const styles = {
     avatarContainer: {
@@ -56,7 +56,8 @@ const styles = {
     },
     panel: {
         margin: 'auto',
-        minWidth: '600px'
+        minWidth: '600px',
+        maxWidth: '600px',
     },
     rankDiv: {
         width: '100px',
@@ -68,33 +69,32 @@ const styles = {
         height: '200px',
         margin: '-50px 0px 0px -100px'
 
+    },
+    title: {
+        marginLeft: '100px'
+    },
+    summonerName: {
+        textShadow: '#FC0 1px 0 15px'
     }
-
 }
 
 const profile_icon = (id) => `http://ddragon.leagueoflegends.com/cdn/11.16.1/img/profileicon/${id}.png`
 
-const Summoner = ({ summonerName }) => {
-    const { loading, data = {} } = useQuery(GET_SUMMONER, {
-        variables: { name: summonerName }
-    });
-
-    const { summoner = {} } = data
-    const { name = '', rank = '', level = '', profileIconId = '', masteryScore = '', tier='' } = summoner
-
-    const skeleton = (
-        <div>
-            <h1>Summoner Data</h1>
-            <Placeholder.Paragraph style={{ marginTop: 30 }} rows={5} graph="circle" active />
-        </div>
-    )
+const Summoner = ({ summonerName, data, loading, error }) => {
+    
+    const skeleton = (<Placeholder.Paragraph style={{ marginTop: 30 }} rows={3} graph="circle" active />)
 
     if (loading) return skeleton
+    if (error) return
 
-    const panelHeader = (level) => {
+    const { summoner = {} } = data
+    const { name = '', rank = '', level = '', profileIconId = '', masteryScore = '', tier = '' } = summoner
+
+
+    const panelHeader = ({ level = '', rank = '', tier = '', masteryScore }) => {
         return (
             <div>
-                <FlexboxGrid justify="space-between" align="middle">
+                <FlexboxGrid justify="start" align="bottom">
                     <FlexboxGrid.Item as={Col} style={styles.avatarContainer}>
                         <Avatar
                             circle
@@ -105,16 +105,17 @@ const Summoner = ({ summonerName }) => {
                         >
                         </Avatar>
                         <div style={styles.wings}>
-                                <img src={`/ranked-emblem/wings_${tier}.png`} alt="wings" style={styles.wings} />
-                            </div>
+                            <img src={`/ranked-emblem/wings_${tier}.png`} alt="wings" style={styles.wings} />
+                        </div>
                         <div style={styles.levelBadge}>
                             <div style={styles.level}>{level}</div >
                         </div>
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item as={Col}>
-                        <h2>{name}</h2>
+                    <FlexboxGrid.Item style={styles.title} as={Col}>
+                        <h2 style={styles.summonerName}>{name}</h2>
+                        <h4>{`${tier} ${rank}`}</h4>
+                        {masteryScore && <h5>{`Mastery Score: ${masteryScore}`}</h5>}
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item as={Col} />
                 </FlexboxGrid>
             </div>
         )
@@ -122,17 +123,8 @@ const Summoner = ({ summonerName }) => {
 
     return (
         <div>
-            <h1>Summoner Data</h1>
-            <Panel header={panelHeader(level)} style={styles.panel} bordered>
-                <div style={styles.rankDiv}>
-                    {rank && <img src={`/ranked-emblem/emblem-${tier}.png`} alt={name} style={styles.rankImg}/>}
-                </div>
-                <p>Name: {name}</p>
-                <p>Profile Icon ID: {profileIconId}</p>
-                <p>Summoner Level: {level}</p>
-                <p>Rank: {rank}</p>
-                <p>Teir: {tier}</p>
-                <p>Mastery Score: {masteryScore}</p>
+            <Panel styles={styles.panel}>
+                {panelHeader(summoner)}
             </Panel>
         </div>
     );

@@ -9,6 +9,7 @@ export const GET_SUMMONER = gql`
         level
         profileIconId
         masteryScore
+        puuid
     }
   }
 `;
