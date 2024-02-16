@@ -43,9 +43,10 @@ const MatchTable = ({ tableData }) => {
 
     return (
         <Table
-            fillHeight
-            height={400}
+            affixHeader
             data={getData()}
+            height={600}
+
             sortColumn={sortColumn}
             sortType={sortType}
             onSortColumn={handleSortColumn}

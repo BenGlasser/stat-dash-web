@@ -18,16 +18,6 @@ const MatchContainer = ({ summonerName, loading, error, data }) => {
         summoner: { puuid }
     } = data
 
-
-    // # Date and time played
-// # Game mode (Ranked, Normal, etc.)
-// # Champion played
-// # Win/Loss outcome
-// # Key stats: kills, deaths, assists, gold earned, vision score
-// # Bonus points:
-// # Sorting and filtering options: date, game mode, champion, win/loss
-// # Pagination for managing long match histories
-// # Optional: Hovering over a match shows detailed stats popup
     const tableData = matchHistory?.map(({ info }, index) => {
         const { gameCreation, gameDuration, gameMode, participants } = info
         const { kills, deaths, assists, goldEarned, visionScore, win, championName, championId } = participants.find(p => p.puuid === puuid)
@@ -50,16 +40,6 @@ const MatchContainer = ({ summonerName, loading, error, data }) => {
     })
 
     return (
-    // date, 
-    // duration, 
-    // game mode, 
-    // champion,
-    // win/loss,
-    // kills, 
-    // deaths,
-    // assists,
-    // gold earned,
-    // vision score
         <Panel>
             <MatchTable tableData={tableData}/>
         </Panel>

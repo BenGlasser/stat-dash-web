@@ -8,17 +8,17 @@ import MatchContainer from '../components/match_container.js'
 import { useQuery } from '@apollo/client'
 import { GET_MATCHES } from '../gql/queries/matches.js'
 
-const SummonerContext = createContext(defaultSummoner);
-
-const Home = ({ ...props }) => {
+const Home = ({ }) => {
 
   const defaultFormValue = { summoner: '' }
 
   const [formValue, setFormValue] = useState(defaultFormValue)
   const [summonerName, setSummonerName] = useState('')
+  
   const { loading, error, data = {} } = useQuery(GET_MATCHES, {
     variables: { name: summonerName }
   });
+
   const handleFormValue = (val) => setFormValue(val)
 
   const handleSubmit = (submitted, e) => {
@@ -31,7 +31,7 @@ const Home = ({ ...props }) => {
   }
 
   return (
-    <SummonerContext.Provider value={defaultSummoner}>
+    <>
       <Header>
         <Heading
           formValue={formValue}
@@ -39,7 +39,7 @@ const Home = ({ ...props }) => {
           handleSubmit={handleSubmit}
           defaultFormValue={defaultFormValue} />
       </Header>
-      <Content>
+      <Content style={{margin: '75px 20px 0 20px'}}>
         <motion.div layout style={{margin: '0 0 20px 0'}} >
           {summonerName && <Summoner 
             summonerName={summonerName} 
@@ -57,7 +57,7 @@ const Home = ({ ...props }) => {
           }
         </motion.div>
       </Content>
-    </SummonerContext.Provider>
+      </>
   )
 }
 
