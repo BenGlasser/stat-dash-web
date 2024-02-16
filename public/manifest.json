@@ -1,6 +1,6 @@
 {
-  "short_name": "Stat Dash App",
-  "name": "View your LoL Stats",
+  "short_name": "stat-dash",
+  "name": "Stat Dash App",
   "icons": [
     {
       "src": "favicon.ico",

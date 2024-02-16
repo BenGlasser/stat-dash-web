@@ -13,7 +13,7 @@ function App() {
   return (
     <CustomProvider theme="dark">
       <ApolloProvider client={client}>
-        <Container className="app"  >
+        <Container className="app">
             <Home />
         </Container>
       </ApolloProvider>
