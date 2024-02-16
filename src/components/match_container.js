@@ -1,10 +1,8 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
 import { Panel } from 'rsuite';
 import MatchTable from './match_table';
-import { GET_MATCHES } from '../gql/queries/matches';
 import { Placeholder } from 'rsuite';
-import ErrorMessage from './error_msg';
+import { ErrorMessage } from './error_msg';
 
 const MatchContainer = ({ summonerName, loading, error, data }) => {
 
@@ -21,7 +19,7 @@ const MatchContainer = ({ summonerName, loading, error, data }) => {
     const tableData = matchHistory?.map(({ info }, index) => {
         const { gameCreation, gameDuration, gameMode, participants } = info
         const { kills, deaths, assists, goldEarned, visionScore, win, championName, championId } = participants.find(p => p.puuid === puuid)
-        console.log({win})
+
         return {
             index,
             gameCreation: new Date(gameCreation).toLocaleString(),

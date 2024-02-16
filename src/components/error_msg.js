@@ -16,4 +16,18 @@ const ErrorMessage = () => {
     )
 }
 
-export default ErrorMessage;
+const NotFound = () => {
+    return (
+        <Panel shaded bordered bodyFill style={{ display: 'block', width: 560,  margin: '50px auto', textAlign: 'center'}} >
+            <Panel header="Sorry Charlie, Summoner Not Found (TдT)">
+            <p>
+                <large>
+                404
+                </large>
+            </p>
+            </Panel>
+        </Panel>
+    )
+}
+
+export { ErrorMessage, NotFound };

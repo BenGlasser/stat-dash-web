@@ -11,7 +11,6 @@ const MatchTable = ({ tableData }) => {
     // TODO refetch data on sort
     const getData = () => {
       if (sortColumn && sortType) {
-        console.log('sorting', sortColumn, sortType)
         return tableData.sort((a, b) => {
           let x = a[sortColumn];
           let y = b[sortColumn];
@@ -50,10 +49,7 @@ const MatchTable = ({ tableData }) => {
             sortColumn={sortColumn}
             sortType={sortType}
             onSortColumn={handleSortColumn}
-            loading={loading}
-            onRowClick={rowData => {
-                console.log(rowData);
-            }}>
+            loading={loading}>
             <Column fixed sortable width={200} align="center" >
                 <HeaderCell>Date</HeaderCell>
                 <Cell dataKey="gameCreation" />
