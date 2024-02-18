@@ -81,7 +81,7 @@ const styles = {
 const profile_icon = (id) => `http://ddragon.leagueoflegends.com/cdn/11.16.1/img/profileicon/${id}.png`
 
 const Summoner = ({ summonerName, data, loading, error }) => {
-    
+
     const skeleton = (<Placeholder.Paragraph style={{ marginTop: 30 }} rows={3} graph="circle" active />)
 
     if (loading) return skeleton
@@ -105,7 +105,7 @@ const Summoner = ({ summonerName, data, loading, error }) => {
                         >
                         </Avatar>
                         <div style={styles.wings}>
-                            <img src={`/ranked-emblem/wings_${tier}.png`} alt="wings" style={styles.wings} />
+                            <img src={`/ranked-emblem/wings_${tier.toLowerCase()}.png`} alt="wings" style={styles.wings} />
                         </div>
                         <div style={styles.levelBadge}>
                             <div style={styles.level}>{level}</div >
@@ -123,7 +123,7 @@ const Summoner = ({ summonerName, data, loading, error }) => {
 
     return (
         <div>
-            <Panel styles={styles.panel}>
+            <Panel style={styles.panel}>
                 {panelHeader(summoner)}
             </Panel>
         </div>
